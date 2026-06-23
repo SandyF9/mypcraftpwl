@@ -1,17 +1,19 @@
 <?php
 
-namespace App\App\Models;
+namespace App\Models; // Diperbaiki dari App\App\Models agar tidak error
 
 use Illuminate\Database\Eloquent\Model;
 
 class KeuanganMasuk extends Model
 {
-    protected $table = 'keuangan_masuks'; // Sesuaikan jika nama tabelmu berbeda
+    protected $table = 'keuangan_masuks';
 
     protected $fillable = [
         'tanggal',
         'nama',
         'kas',
         'modal',
+        'total',       // Ditambahkan
+        'keterangan',  // Ditambahkan
     ];
 }

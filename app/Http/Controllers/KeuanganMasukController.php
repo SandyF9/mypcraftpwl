@@ -76,10 +76,12 @@ class KeuanganKeluarMasukController extends Controller
     private function validateKeuangan(Request $request): array
     {
         return $request->validate([
-            'tanggal' => ['required', 'date'],
-            'nama'    => ['required', 'string', 'max:100'],
-            'kas'     => ['required', 'integer'],
-            'total'   => ['required', 'integer'],
+            'tanggal'    => ['required', 'date'],
+            'nama'       => ['required', 'string', 'max:100'],
+            'kas'        => ['required', 'integer'],
+            'modal'      => ['required', 'integer'],      // Ditambahkan
+            'total'      => ['required', 'integer'],
+            'keterangan' => ['nullable', 'string'],        // Ditambahkan (nullable jika boleh kosong)
         ]);
     }
 }
