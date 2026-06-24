@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KeuanganKeluar;
+// Menggunakan model KeuanganKeluar untuk mencatat transaksi pengeluaran
+use App\Models\KeuanganKeluar; 
 use Illuminate\Http\Request;
 
 class KeuanganKeluarController extends Controller
@@ -12,13 +13,14 @@ class KeuanganKeluarController extends Controller
      */
     public function index()
     {
+        // Mengambil data dari model KeuanganKeluar dengan pagination (10 data per halaman)
         $keuanganKeluar = KeuanganKeluar::latest()->paginate(10);
         
         return view('keuangan-keluar.index', compact('keuanganKeluar'));
     }
 
     /**
-     * Menampilkan form untuk membuat data baru.
+     * Menampilkan form untuk membuat data pengeluaran baru.
      */
     public function create()
     {
@@ -26,12 +28,13 @@ class KeuanganKeluarController extends Controller
     }
 
     /**
-     * Menyimpan data keuangan baru ke database.
+     * Menyimpan data keuangan keluar baru ke database.
      */
     public function store(Request $request)
     {
         $validated = $this->validateKeuangan($request);
 
+        // Menyimpan menggunakan model KeuanganKeluar
         KeuanganKeluar::create($validated);
 
         return redirect()->route('keuangan-keluar.index')
@@ -39,7 +42,7 @@ class KeuanganKeluarController extends Controller
     }
 
     /**
-     * Menampilkan form untuk mengedit data.
+     * Menampilkan form untuk mengedit data pengeluaran.
      */
     public function edit(KeuanganKeluar $keuanganKeluar)
     {
@@ -47,7 +50,7 @@ class KeuanganKeluarController extends Controller
     }
 
     /**
-     * Memperbarui data keuangan di database.
+     * Memperbarui data keuangan keluar di database.
      */
     public function update(Request $request, KeuanganKeluar $keuanganKeluar)
     {
@@ -60,7 +63,7 @@ class KeuanganKeluarController extends Controller
     }
 
     /**
-     * Menghapus data keuangan dari database.
+     * Menghapus data keuangan keluar dari database.
      */
     public function destroy(KeuanganKeluar $keuanganKeluar)
     {
@@ -76,11 +79,12 @@ class KeuanganKeluarController extends Controller
     private function validateKeuangan(Request $request): array
     {
         return $request->validate([
-            'tanggal'    => ['required', 'date'],
-            'nama'       => ['required', 'string', 'max:100'],
-            'kas'        => ['required', 'integer'],
-            'modal'      => ['required', 'integer'],     
-            'keterangan' => ['nullable', 'string'],        
+            'tanggal'     => ['required', 'date'],
+            'nama'        => ['required', 'string', 'max:100'],
+            'quantitas'   => ['required', 'integer'],
+            'harga_satuan'=> ['required', 'integer'], 
+            'jumlah'      => ['required', 'integer'],     
+            'keterangan'  => ['nullable', 'string'],       
         ]);
     }
 }

@@ -13,7 +13,7 @@ class KeuanganMasuk extends Model
         'nama',
         'kas',
         'modal',
-        'total',       // Ditambahkan
-        'keterangan',  // Ditambahkan
+        'total',
+        'keterangan',
     ];
 }

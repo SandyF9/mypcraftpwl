@@ -13,9 +13,9 @@ class KeuanganKas extends Model
     protected $fillable = [
         'tanggal',
         'nama',
-        'kas',
-        'modal',       
-        'total',
+        'quantitas',
+        'harga_satuan',
+        'jumlah', // Tetap dimasukkan agar bisa disimpan otomatis oleh model
         'keterangan',
     ];
 }

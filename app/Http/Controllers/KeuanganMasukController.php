@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KeuanganKeluarMasuk;
+// Pastikan namespace model ini sesuai dengan model yang Anda gunakan untuk keuangan masuk
+use App\Models\KeuanganMasuk; 
 use Illuminate\Http\Request;
 
-class KeuanganKeluarMasukController extends Controller
+class KeuanganMasukController extends Controller
 {
     /**
-     * Menampilkan daftar keuangan keluar masuk.
+     * Menampilkan daftar keuangan masuk.
      */
     public function index()
     {
-        $keuanganKeluarMasuk = KeuanganKeluarMasuk::latest()->paginate(10);
+        // PERBAIKAN: Menggunakan model KeuanganMasuk yang konsisten
+        $keuanganMasuk = KeuanganMasuk::latest()->paginate(10);
         
-        return view('keuangan-keluar-masuk.index', compact('keuanganKeluarMasuk'));
+        return view('keuangan-masuk.index', compact('keuanganMasuk'));
     }
 
     /**
@@ -22,52 +24,53 @@ class KeuanganKeluarMasukController extends Controller
      */
     public function create()
     {
-        return view('keuangan-keluar-masuk.create');
+        return view('keuangan-masuk.create');
     }
 
     /**
-     * Menyimpan data keuangan baru ke database.
+     * Menyimpan data keuangan masuk baru ke database.
      */
     public function store(Request $request)
     {
         $validated = $this->validateKeuangan($request);
 
-        KeuanganKeluarMasuk::create($validated);
+        // PERBAIKAN: Menggunakan model KeuanganMasuk
+        KeuanganMasuk::create($validated);
 
-        return redirect()->route('keuangan-keluar-masuk.index')
-            ->with('success', 'Data keuangan keluar masuk berhasil ditambahkan.');
+        return redirect()->route('keuangan-masuk.index')
+            ->with('success', 'Data keuangan masuk berhasil ditambahkan.');
     }
 
     /**
      * Menampilkan form untuk mengedit data.
      */
-    public function edit(KeuanganKeluarMasuk $keuanganKeluarMasuk)
+    public function edit(KeuanganMasuk $keuanganMasuk)
     {
-        return view('keuangan-keluar-masuk.edit', compact('keuanganKeluarMasuk'));
+        return view('keuangan-masuk.edit', compact('keuanganMasuk'));
     }
 
     /**
-     * Memperbarui data keuangan di database.
+     * Memperbarui data keuangan masuk di database.
      */
-    public function update(Request $request, KeuanganKeluarMasuk $keuanganKeluarMasuk)
+    public function update(Request $request, KeuanganMasuk $keuanganMasuk)
     {
         $validated = $this->validateKeuangan($request);
 
-        $keuanganKeluarMasuk->update($validated);
+        $keuanganMasuk->update($validated);
 
-        return redirect()->route('keuangan-keluar-masuk.index')
-            ->with('success', 'Data keuangan keluar masuk berhasil diupdate.');
+        return redirect()->route('keuangan-masuk.index')
+            ->with('success', 'Data keuangan masuk berhasil diupdate.');
     }
 
     /**
-     * Menghapus data keuangan dari database.
+     * Menghapus data keuangan masuk dari database.
      */
-    public function destroy(KeuanganKeluarMasuk $keuanganKeluarMasuk)
+    public function destroy($keuanganMasuk)
     {
-        $keuanganKeluarMasuk->delete();
+        $keuanganMasuk->delete();
 
-        return redirect()->route('keuangan-keluar-masuk.index')
-            ->with('success', 'Data keuangan keluar masuk berhasil dihapus.');
+        return redirect()->route('keuangan-masuk.index')
+            ->with('success', 'Data keuangan masuk berhasil dihapus.');
     }
 
     /**
@@ -76,12 +79,11 @@ class KeuanganKeluarMasukController extends Controller
     private function validateKeuangan(Request $request): array
     {
         return $request->validate([
-            'tanggal'    => ['required', 'date'],
-            'nama'       => ['required', 'string', 'max:100'],
-            'kas'        => ['required', 'integer'],
-            'modal'      => ['required', 'integer'],      // Ditambahkan
-            'total'      => ['required', 'integer'],
-            'keterangan' => ['nullable', 'string'],        // Ditambahkan (nullable jika boleh kosong)
+            'tanggal'      => ['required', 'date'],
+            'nama_produk'  => ['required', 'string'],
+            'harga_satuan' => ['required', 'integer'],      
+            'jumlah'       => ['required', 'integer'],
+            'keterangan'   => ['nullable', 'string'], //opsional diubah atau tidak       
         ]);
     }
 }
