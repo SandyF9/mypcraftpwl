@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-// Pastikan namespace model ini sesuai dengan model yang Anda gunakan untuk keuangan masuk
 use App\Models\KeuanganMasuk; 
 use Illuminate\Http\Request;
 

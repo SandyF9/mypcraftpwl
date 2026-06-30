@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-// Menggunakan model KeuanganKeluar untuk mencatat transaksi pengeluaran
 use App\Models\KeuanganKeluar; 
 use Illuminate\Http\Request;
 
