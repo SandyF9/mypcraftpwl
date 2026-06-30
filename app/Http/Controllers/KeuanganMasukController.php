@@ -13,9 +13,9 @@ class KeuanganMasukController extends Controller
     public function index()
     {
         // PERBAIKAN: Menggunakan model KeuanganMasuk yang konsisten
-        $keuanganMasuk = KeuanganMasuk::latest()->paginate(10);
+        $keuanganMasuks = KeuanganMasuk::latest()->paginate(10);
         
-        return view('keuangan-masuk.index', compact('keuanganMasuk'));
+        return view('keuangan-masuks.index', compact('keuanganMasuks'));
     }
 
     /**
@@ -23,7 +23,7 @@ class KeuanganMasukController extends Controller
      */
     public function create()
     {
-        return view('keuangan-masuk.create');
+        return view('keuangan-masuks.create');
     }
 
     /**
@@ -36,39 +36,39 @@ class KeuanganMasukController extends Controller
         // PERBAIKAN: Menggunakan model KeuanganMasuk
         KeuanganMasuk::create($validated);
 
-        return redirect()->route('keuangan-masuk.index')
+        return redirect()->route('keuangan-masuks.index')
             ->with('success', 'Data keuangan masuk berhasil ditambahkan.');
     }
 
     /**
      * Menampilkan form untuk mengedit data.
      */
-    public function edit(KeuanganMasuk $keuanganMasuk)
+    public function edit(KeuanganMasuk $keuanganMasuks)
     {
-        return view('keuangan-masuk.edit', compact('keuanganMasuk'));
+        return view('keuangan-masuks.edit', compact('keuanganMasuks'));
     }
 
     /**
      * Memperbarui data keuangan masuk di database.
      */
-    public function update(Request $request, KeuanganMasuk $keuanganMasuk)
+    public function update(Request $request, KeuanganMasuk $keuanganMasuks)
     {
         $validated = $this->validateKeuangan($request);
 
-        $keuanganMasuk->update($validated);
+        $keuanganMasuks->update($validated);
 
-        return redirect()->route('keuangan-masuk.index')
+        return redirect()->route('keuangan-masuks.index')
             ->with('success', 'Data keuangan masuk berhasil diupdate.');
     }
 
     /**
      * Menghapus data keuangan masuk dari database.
      */
-    public function destroy($keuanganMasuk)
+    public function destroy($keuanganMasuks)
     {
-        $keuanganMasuk->delete();
+        $keuanganMasuks->delete();
 
-        return redirect()->route('keuangan-masuk.index')
+        return redirect()->route('keuangan-masuks.index')
             ->with('success', 'Data keuangan masuk berhasil dihapus.');
     }
 

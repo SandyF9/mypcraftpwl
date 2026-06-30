@@ -13,9 +13,9 @@ class KeuanganKeluarController extends Controller
     public function index()
     {
         // Mengambil data dari model KeuanganKeluar dengan pagination (10 data per halaman)
-        $keuanganKeluar = KeuanganKeluar::latest()->paginate(10);
+        $keuanganKeluars = KeuanganKeluar::latest()->paginate(10);
         
-        return view('keuangan-keluar.index', compact('keuanganKeluar'));
+        return view('keuangan-keluars.index', compact('keuanganKeluars'));
     }
 
     /**
@@ -23,7 +23,7 @@ class KeuanganKeluarController extends Controller
      */
     public function create()
     {
-        return view('keuangan-keluar.create');
+        return view('keuangan-keluars.create');
     }
 
     /**
@@ -36,39 +36,39 @@ class KeuanganKeluarController extends Controller
         // Menyimpan menggunakan model KeuanganKeluar
         KeuanganKeluar::create($validated);
 
-        return redirect()->route('keuangan-keluar.index')
+        return redirect()->route('keuangan-keluars.index')
             ->with('success', 'Data keuangan keluar berhasil ditambahkan.');
     }
 
     /**
      * Menampilkan form untuk mengedit data pengeluaran.
      */
-    public function edit(KeuanganKeluar $keuanganKeluar)
+    public function edit(KeuanganKeluar $keuanganKeluars)
     {
-        return view('keuangan-keluar.edit', compact('keuanganKeluar'));
+        return view('keuangan-keluars.edit', compact('keuanganKeluars'));
     }
 
     /**
      * Memperbarui data keuangan keluar di database.
      */
-    public function update(Request $request, KeuanganKeluar $keuanganKeluar)
+    public function update(Request $request, KeuanganKeluar $keuanganKeluars)
     {
         $validated = $this->validateKeuangan($request);
 
-        $keuanganKeluar->update($validated);
+        $keuanganKeluars->update($validated);
 
-        return redirect()->route('keuangan-keluar.index')
+        return redirect()->route('keuangan-keluars.index')
             ->with('success', 'Data keuangan keluar berhasil diupdate.');
     }
 
     /**
      * Menghapus data keuangan keluar dari database.
      */
-    public function destroy(KeuanganKeluar $keuanganKeluar)
+    public function destroy(KeuanganKeluar $keuanganKeluars)
     {
-        $keuanganKeluar->delete();
+        $keuanganKeluars->delete();
 
-        return redirect()->route('keuangan-keluar.index')
+        return redirect()->route('keuangan-keluars.index')
             ->with('success', 'Data keuangan keluar berhasil dihapus.');
     }
 

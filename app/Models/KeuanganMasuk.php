@@ -10,10 +10,10 @@ class KeuanganMasuk extends Model
 
     protected $fillable = [
         'tanggal',
-        'nama',
-        'kas',
-        'modal',
-        'total',
-        'keterangan',
+        'nama_produk',
+        'quantity',
+        'harga_satuan',
+        'jumlah',
+        'keterangan'
     ];
 }

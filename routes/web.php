@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\KeuanganKeluarController;
+use App\Http\Controllers\KeuanganMasukController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
@@ -23,9 +24,12 @@ Route::get('/', function () {
 // 3. Rute khusus Admin 
     Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('users', UserController::class)->except(['show']);
-    Route::resource('keuangans', KeuanganController::class);
-    Route::resource('stocks', StockController::class);
+    Route::resource('keuangan-masuks', KeuanganMasukController::class);
+    Route::resource('keuangan-keluars', KeuanganKeluarController::class);
+    
+    // 4. Kemungkianan tidak digunakan
     Route::resource('pelanggans', PelangganController::class);
+    
 });
 
 require __DIR__.'/auth.php';

@@ -17,11 +17,17 @@
                     </x-nav-link>
                 </div>
 
-            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <x-nav-link :href="route('keuangans.index')" :active="request()->routeIs('keuangans.*')">
-                    {{ __('Laporan Keuangan') }}
-                </x-nav-link>
-            </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('keuangan-keluars.index')" :active="request()->routeIs('keuangan-keluars.*')">
+                        {{ __('Keuangan Keluar') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('keuangan-masuks.index')" :active="request()->routeIs('keuangan-masuks.*')">
+                        {{ __('Keuangan Masuk') }}
+                    </x-nav-link>
+                </div>
 
             </div>
 

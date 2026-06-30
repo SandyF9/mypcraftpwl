@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Http\Controllers; // Pastikan namespace sesuai dengan struktur folder kamu, biasanya App\Models; jika berada di folder Models
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class KeuanganKas extends Model
+class KeuanganKeluar extends Model
 {
-    protected $table = 'keuangan_kas';
+    protected $table = 'keuangankeluars';
+
 
     protected $fillable = [
         'tanggal',
         'nama',
-        'quantitas',
+        'quantity',
         'harga_satuan',
-        'jumlah', // Tetap dimasukkan agar bisa disimpan otomatis oleh model
-        'keterangan',
+        'jumlah',
+        'keterangan'
     ];
 }
