@@ -9,13 +9,13 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm sm:rounded-lg p-6">
 
-                <form action="{{ route('keuangan-masuks.update', $keuanganMasuks->id) }}" method="POST">
+                <form action="{{ route('keuangan-masuks.update', $keuanganMasuk->id) }}" method="POST">
                     @csrf
                     @method('PUT')
 
                     <div class="mb-4">
                         <label class="block font-medium mb-1"> Tanggal </label>
-                        <input type="date" name="tanggal" value="{{ old('tanggal', $keuanganMasuks->tanggal) }}"
+                        <input type="date" name="tanggal" value="{{ old('tanggal', $keuanganMasuk->tanggal) }}"
                             class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                         @error('tanggal')
                             <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
@@ -24,7 +24,7 @@
 
                     <div class="mb-4">
                         <label class="block font-medium mb-1"> Nama Produk </label>
-                        <input type="text" name="nama_produk" value="{{ old('nama_produk', $keuanganMasuks->nama_produk) }}" placeholder="Contoh: Penjualan Kaos"
+                        <input type="text" name="nama_produk" value="{{ old('nama_produk', $keuanganMasuk->nama_produk) }}" placeholder="Contoh: Penjualan Kaos"
                             class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                         @error('nama_produk')
                             <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
@@ -34,7 +34,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>
                             <label class="block font-medium mb-1"> Quantity </label>
-                            <input type="number" name="quantity" id="quantity" value="{{ old('quantity', $keuanganMasuks->quantity) }}" min="1" placeholder="0"
+                            <input type="number" name="quantity" id="quantity" value="{{ old('quantity', $keuanganMasuk->quantity) }}" min="1" placeholder="0"
                                 class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                             @error('quantity')
                                 <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
@@ -43,7 +43,7 @@
 
                         <div>
                             <label class="block font-medium mb-1"> Harga Satuan (Rp)</label>
-                            <input type="number" name="harga_satuan" id="harga_satuan" value="{{ old('harga_satuan', $keuanganMasuks->harga_satuan) }}" min="0" placeholder="0"
+                            <input type="number" name="harga_satuan" id="harga_satuan" value="{{ old('harga_satuan', $keuanganMasuk->harga_satuan) }}" min="0" placeholder="0"
                                 class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                             @error('harga_satuan')
                                 <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
@@ -53,7 +53,7 @@
 
                     <div class="mb-4">
                         <label class="block font-medium mb-1"> Jumlah (Rp)</label>
-                        <input type="number" name="jumlah" id="jumlah" value="{{ old('jumlah', $keuanganMasuks->jumlah) }}" readonly placeholder="Otomatis terhitung"
+                        <input type="number" name="jumlah" id="jumlah" value="{{ old('jumlah', $keuanganMasuk->jumlah) }}" readonly placeholder="Otomatis terhitung"
                             class="w-full border rounded px-3 py-2 bg-gray-100 cursor-not-allowed text-gray-600 font-semibold focus:outline-none">
                         @error('jumlah')
                             <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
@@ -63,7 +63,7 @@
                     <div class="mb-6">
                         <label class="block font-medium mb-1"> Keterangan </label>
                         <textarea name="keterangan" rows="3" placeholder="Tambahkan catatan jika diperlukan..."
-                            class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">{{ old('keterangan', $keuanganMasuks->keterangan) }}</textarea>
+                            class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">{{ old('keterangan', $keuanganMasuk->keterangan) }}</textarea>
                         @error('keterangan')
                             <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                         @enderror
@@ -71,8 +71,8 @@
 
                     <div class="flex gap-2">
                         <button type="submit" 
-                            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition font-medium">
-                            Perbarui
+                            class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition font-medium">
+                            Perbarui Pemasukan
                         </button>
 
                         <a href="{{ route('keuangan-masuks.index') }}"
@@ -97,6 +97,7 @@
                 const harga = parseFloat(hargaInput.value) || 0;
                 jumlahInput.value = qty * harga;
             }
+            hitungTotal();
 
             quantityInput.addEventListener('input', hitungTotal);
             hargaInput.addEventListener('input', hitungTotal);

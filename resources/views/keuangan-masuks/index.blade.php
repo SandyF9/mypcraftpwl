@@ -4,8 +4,8 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Daftar Keuangan Masuk') }}
             </h2>
-            <a href="{{ route('keuangan-keluars.create') }}" 
-                class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition font-medium text-sm">
+            <a href="{{ route('keuangan-masuks.create') }}" 
+                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition font-medium text-sm">
                 Tambah Data
             </a>
         </div>
@@ -33,7 +33,7 @@
                                 <th class="p-3 border-b text-right">Harga Satuan</th>
                                 <th class="p-3 border-b text-right">Total Jumlah</th>
                                 <th class="p-3 border-b">Keterangan</th>
-                            </tr>
+                                <th class="p-3 border-b text-center">Aksi</th> </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm divide-y divide-gray-200">
                             @forelse ($keuanganMasuks as $index => $item)
@@ -51,8 +51,8 @@
                                     </td>
                                     <td class="p-3 text-center whitespace-nowrap">
                                         <div class="flex gap-2 justify-center">
-                                            <a href="{{ route('keuangan-masuksedit', $item->id) }}" 
-                                                class="px-3 py-1 bg-amber-500 text-white rounded text-xs font-medium hover:bg-amber-600 transition">
+                                            <a href="{{ route('keuangan-masuks.edit', $item->id) }}" 
+                                                class="px-3 py-1 bg-red-600 text-white rounded text-xs font-medium hover:bg-red-700 transition">
                                                 Edit
                                             </a>
                                             

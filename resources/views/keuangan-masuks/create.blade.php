@@ -46,7 +46,7 @@
                                 class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                             @error('harga_satuan')
                                 <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
-                            @enderror
+                        @enderror
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@
                             Simpan
                         </button>
 
-                        <a href="{{ route('keuangan-keluars.index') }}"
+                        <a href="{{ route('keuangan-masuks.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition font-medium">
                             Kembali
                         </a>
@@ -96,6 +96,7 @@
                 const harga = parseFloat(hargaInput.value) || 0;
                 jumlahInput.value = qty * harga;
             }
+            hitungTotal();
 
             quantityInput.addEventListener('input', hitungTotal);
             hargaInput.addEventListener('input', hitungTotal);

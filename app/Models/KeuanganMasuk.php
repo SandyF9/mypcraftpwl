@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models; // Diperbaiki dari App\App\Models agar tidak error
+namespace App\Models; 
 
 use Illuminate\Database\Eloquent\Model;
 
 class KeuanganMasuk extends Model
 {
-    protected $table = 'keuangan_masuks';
+    protected $table = 'keuanganmasuks';
 
     protected $fillable = [
         'tanggal',

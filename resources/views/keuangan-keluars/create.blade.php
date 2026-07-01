@@ -67,7 +67,7 @@
                             <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-
+                    
                     <div class="flex gap-2">
                         <button type="submit" 
                             class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition font-medium">
@@ -86,19 +86,21 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const quantityInput = document.getElementById('quantity');
-            const hargaInput = document.getElementById('harga_satuan');
-            const jumlahInput = document.getElementById('jumlah');
+    document.addEventListener('DOMContentLoaded', function () {
+        const quantityInput = document.getElementById('quantity');
+        const hargaInput = document.getElementById('harga_satuan');
+        const jumlahInput = document.getElementById('jumlah');
 
-            function hitungTotal() {
-                const qty = parseFloat(quantityInput.value) || 0;
-                const harga = parseFloat(hargaInput.value) || 0;
-                jumlahInput.value = qty * harga;
-            }
+        function hitungTotal() {
+            const qty = parseFloat(quantityInput.value) || 0;
+            const harga = parseFloat(hargaInput.value) || 0;
+            jumlahInput.value = qty * harga;
+        }
 
-            quantityInput.addEventListener('input', hitungTotal);
-            hargaInput.addEventListener('input', hitungTotal);
-        });
-    </script>
+        hitungTotal();
+
+        quantityInput.addEventListener('input', hitungTotal);
+        hargaInput.addEventListener('input', hitungTotal);
+    });
+</script>
 </x-app-layout>

@@ -12,7 +12,6 @@ class KeuanganMasukController extends Controller
      */
     public function index()
     {
-        // PERBAIKAN: Menggunakan model KeuanganMasuk yang konsisten
         $keuanganMasuks = KeuanganMasuk::latest()->paginate(10);
         
         return view('keuangan-masuks.index', compact('keuanganMasuks'));
@@ -33,7 +32,6 @@ class KeuanganMasukController extends Controller
     {
         $validated = $this->validateKeuangan($request);
 
-        // PERBAIKAN: Menggunakan model KeuanganMasuk
         KeuanganMasuk::create($validated);
 
         return redirect()->route('keuangan-masuks.index')
@@ -43,19 +41,19 @@ class KeuanganMasukController extends Controller
     /**
      * Menampilkan form untuk mengedit data.
      */
-    public function edit(KeuanganMasuk $keuanganMasuks)
+    public function edit(KeuanganMasuk $keuanganMasuk) 
     {
-        return view('keuangan-masuks.edit', compact('keuanganMasuks'));
+        return view('keuangan-masuks.edit', compact('keuanganMasuk'));
     }
 
     /**
      * Memperbarui data keuangan masuk di database.
      */
-    public function update(Request $request, KeuanganMasuk $keuanganMasuks)
+    public function update(Request $request, KeuanganMasuk $keuanganMasuk)
     {
         $validated = $this->validateKeuangan($request);
 
-        $keuanganMasuks->update($validated);
+        $keuanganMasuk->update($validated);
 
         return redirect()->route('keuangan-masuks.index')
             ->with('success', 'Data keuangan masuk berhasil diupdate.');
@@ -64,9 +62,9 @@ class KeuanganMasukController extends Controller
     /**
      * Menghapus data keuangan masuk dari database.
      */
-    public function destroy($keuanganMasuks)
+    public function destroy(KeuanganMasuk $keuanganMasuk)
     {
-        $keuanganMasuks->delete();
+        $keuanganMasuk->delete();
 
         return redirect()->route('keuangan-masuks.index')
             ->with('success', 'Data keuangan masuk berhasil dihapus.');
@@ -79,10 +77,11 @@ class KeuanganMasukController extends Controller
     {
         return $request->validate([
             'tanggal'      => ['required', 'date'],
-            'nama_produk'  => ['required', 'string'],
-            'harga_satuan' => ['required', 'integer'],      
+            'nama_produk'  => ['required', 'string', 'max:255'],
+            'quantity'     => ['required', 'integer', 'min:1'],
+            'harga_satuan' => ['required', 'integer', 'min:0'],      
             'jumlah'       => ['required', 'integer'],
-            'keterangan'   => ['nullable', 'string'], //opsional diubah atau tidak       
+            'keterangan'   => ['nullable', 'string'],       
         ]);
     }
 }

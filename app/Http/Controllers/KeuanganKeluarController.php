@@ -12,7 +12,6 @@ class KeuanganKeluarController extends Controller
      */
     public function index()
     {
-        // Mengambil data dari model KeuanganKeluar dengan pagination (10 data per halaman)
         $keuanganKeluars = KeuanganKeluar::latest()->paginate(10);
         
         return view('keuangan-keluars.index', compact('keuanganKeluars'));
@@ -33,7 +32,6 @@ class KeuanganKeluarController extends Controller
     {
         $validated = $this->validateKeuangan($request);
 
-        // Menyimpan menggunakan model KeuanganKeluar
         KeuanganKeluar::create($validated);
 
         return redirect()->route('keuangan-keluars.index')
@@ -43,19 +41,19 @@ class KeuanganKeluarController extends Controller
     /**
      * Menampilkan form untuk mengedit data pengeluaran.
      */
-    public function edit(KeuanganKeluar $keuanganKeluars)
+    public function edit(KeuanganKeluar $keuanganKeluar) // PERBAIKAN: Diubah menjadi tunggal ($keuanganKeluar)
     {
-        return view('keuangan-keluars.edit', compact('keuanganKeluars'));
+        return view('keuangan-keluars.edit', compact('keuanganKeluar'));
     }
 
     /**
      * Memperbarui data keuangan keluar di database.
      */
-    public function update(Request $request, KeuanganKeluar $keuanganKeluars)
+    public function update(Request $request, KeuanganKeluar $keuanganKeluar) // PERBAIKAN: Diubah menjadi tunggal ($keuanganKeluar)
     {
         $validated = $this->validateKeuangan($request);
 
-        $keuanganKeluars->update($validated);
+        $keuanganKeluar->update($validated);
 
         return redirect()->route('keuangan-keluars.index')
             ->with('success', 'Data keuangan keluar berhasil diupdate.');
@@ -64,9 +62,9 @@ class KeuanganKeluarController extends Controller
     /**
      * Menghapus data keuangan keluar dari database.
      */
-    public function destroy(KeuanganKeluar $keuanganKeluars)
+    public function destroy(KeuanganKeluar $keuanganKeluar)
     {
-        $keuanganKeluars->delete();
+        $keuanganKeluar->delete();
 
         return redirect()->route('keuangan-keluars.index')
             ->with('success', 'Data keuangan keluar berhasil dihapus.');
@@ -79,9 +77,9 @@ class KeuanganKeluarController extends Controller
     {
         return $request->validate([
             'tanggal'     => ['required', 'date'],
-            'nama'        => ['required', 'string', 'max:100'],
-            'quantitas'   => ['required', 'integer'],
-            'harga_satuan'=> ['required', 'integer'], 
+            'nama'        => ['required', 'string', 'max:255'],
+            'quantity'    => ['required', 'integer', 'min:1'],
+            'harga_satuan'=> ['required', 'integer', 'min:0'], 
             'jumlah'      => ['required', 'integer'],     
             'keterangan'  => ['nullable', 'string'],       
         ]);

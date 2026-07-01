@@ -8,7 +8,6 @@ class KeuanganKeluar extends Model
 {
     protected $table = 'keuangankeluars';
 
-
     protected $fillable = [
         'tanggal',
         'nama',

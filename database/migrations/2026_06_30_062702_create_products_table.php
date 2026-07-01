@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('office');
             $table->integer('age');
             $table->date('start_date');
-            $table->decimal('salary', 15, 2);
+            $table->decimal('salary');
             $table->timestamps();
         });
     }
