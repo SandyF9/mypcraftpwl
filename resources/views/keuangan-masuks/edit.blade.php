@@ -43,7 +43,7 @@
 
                         <div>
                             <label class="block font-medium mb-1"> Harga Satuan (Rp)</label>
-                            <input type="number" name="harga_satuan" id="harga_satuan" value="{{ old('harga_satuan', $keuanganMasuk->harga_satuan) }}" min="0" placeholder="0"
+                            <input type="number" name="harga_satuan" id="harga_satuan" value="{{ old('harga_satuan', (int)$keuanganMasuk->harga_satuan) }}" min="0" placeholder="0"
                                 class="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                             @error('harga_satuan')
                                 <div class="text-red-600 text-sm mt-1">{{ $message }}</div>
